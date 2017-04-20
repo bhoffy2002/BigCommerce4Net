@@ -357,8 +357,7 @@ namespace BigCommerce4Net.Api
                 page = 0;
             }
             string str = string.Format("Page {0} Record Count {1} -- API Limit: {2}", page, count,
-                        response.Headers.Where(x => x.Name == "X-BC-ApiLimit-Remaining").FirstOrDefault().Value);
-
+                response.Headers.Where(x => x.Name.ToUpper() == "X-BC-APILIMIT-REMAINING").FirstOrDefault().Value);
             return str;
         }
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger
