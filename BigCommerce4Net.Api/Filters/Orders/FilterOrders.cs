@@ -16,14 +16,24 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using RestSharp;
 
 namespace BigCommerce4Net.Api
 {
+    public enum SortDirection {
+        Asc,
+        Desc
+    }
     public class FilterOrders : Filter, IFilter
     {
+
+        public FilterOrders() {
+            SortDirection = SortDirection.Asc;
+        }
+
         /// <summary>
         /// The minimum id of the order.
         /// </summary>
@@ -78,6 +88,16 @@ namespace BigCommerce4Net.Api
         /// </summary>
         public DateTime? MaximumDateCreated { get; set; }
 
+        /// <summary>
+        /// Allows for indicating sorting direction, when Sort field is provided
+        /// </summary>
+        public SortDirection SortDirection { get; set; }
+
+        /// <summary>
+        /// Indicates a field for which results are going to be sorted by
+        /// </summary>
+        public string Sort { get; set; }
+
         public override void AddFilter(IRestRequest request) {
             base.AddFilter(request);
                 
@@ -110,6 +130,9 @@ namespace BigCommerce4Net.Api
             }
             if (this.MaximumDateCreated != null) {
                 request.AddParameter("max_date_created", String.Format(RFC2822_DATE_FORMAT, this.MaximumDateCreated), ParameterType.GetOrPost);
+            }
+            if (!string.IsNullOrEmpty(this.Sort)) {
+                request.AddParameter("sort", string.Format("{0}:{1}", this.Sort, this.SortDirection.ToString().ToLowerInvariant()), ParameterType.GetOrPost);
             }
         }
     }

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Common\Address.cs" />
+    <Compile Include="Entities\Common\FormField.cs" />
     <Compile Include="Entities\EntityBase.cs" />
     <Compile Include="Entities\Common\Brand.cs" />
     <Compile Include="Entities\Common\Category.cs" />

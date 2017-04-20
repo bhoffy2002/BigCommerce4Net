@@ -64,6 +64,14 @@ namespace BigCommerce4Net.Domain
         public virtual string TrackingNumber { get; set; }
 
         /// <summary>
+        /// The shipping provider for the shipment.
+        /// 
+        /// string(50)
+        /// </summary>
+        [JsonProperty("shipping_provider")]
+        public virtual string ShippingProvider { get; set; }
+
+        /// <summary>
         /// The name of the shipping method used.
         /// 
         /// string(100)

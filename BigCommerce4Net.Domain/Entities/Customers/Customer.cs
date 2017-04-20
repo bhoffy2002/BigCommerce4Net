@@ -153,6 +153,9 @@ namespace BigCommerce4Net.Domain
         [JsonProperty("addresses")]
         public virtual Resource ResourceAddresses { get; set; }
 
+        [JsonProperty("form_fields")]
+        public virtual IList<FormField> FormFields { get; set; }
+
 
         [JsonIgnore]
         public virtual IList<CustomersAddress> Addresses { get; set; }
