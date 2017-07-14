@@ -54,6 +54,7 @@
     <Compile Include="Entities\Customers\Customer.cs" />
     <Compile Include="Entities\Customers\CustomersAddress.cs" />
     <Compile Include="Entities\Coupons\Coupon.cs" />
+    <Compile Include="Entities\Orders\OrderForCreate.cs" />
     <Compile Include="Entities\Utilities\Error.cs" />
     <Compile Include="Entities\Utilities\ErrorDetails.cs" />
     <Compile Include="Entities\IEntity.cs">
