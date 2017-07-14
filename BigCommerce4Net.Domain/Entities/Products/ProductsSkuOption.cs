@@ -38,5 +38,12 @@ namespace BigCommerce4Net.Domain
         /// </summary>
         [JsonProperty("option_value_id")]
         public virtual int OptionValueId { get; set; }
+
+        //AZDeveloper777  7/14/2017
+        //This was in our production code, so I'm adding it to our repository branch for production
+        public virtual int ProductsSku_Id { get; set; }
+        public virtual ProductsSku ProductsSku { get; set; }
+
+        public virtual int ProductSkuOptionID { get; set; }
     }
 }
