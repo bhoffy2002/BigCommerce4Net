@@ -59,6 +59,12 @@ namespace BigCommerce4Net.Domain
         [JsonProperty("cost_price")]
         public virtual decimal CostPrice { get; set; }
 
+        [JsonProperty("price")]
+        public virtual decimal? Price { get; set; }
+
+        [JsonProperty("adjusted_price")]
+        public virtual decimal? AdjustedPrice { get; set; }
+
         /// <summary>
         /// UPC for the product combination.
         /// 
