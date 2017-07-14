@@ -92,5 +92,16 @@ namespace BigCommerce4Net.Api.ResourceClients
             var orders = base.RecordPaging<Order>(filter, this);
             return orders;
         }
+
+        public IClientResponse<Order> Create(string json) {
+            string resourceEndpoint = "/orders";
+            return base.PostData<Order>(resourceEndpoint, json);
+        }
+
+        public IClientResponse<Order> Create(object obj)
+        {
+            string resourceEndpoint = "/orders";
+            return base.PostData<Order>(resourceEndpoint, obj.SerializeObject());
+        }
     }
 }
