@@ -241,7 +241,7 @@ namespace BigCommerce4Net.Api
         }
         private void CheckForThrottling(IRestResponse response) {
             if (_Configuration.RequestThrottling == true) {
-                var head = response.Headers.Where(x => x.Name == "X-BC-ApiLimit-Remaining").FirstOrDefault();
+                var head = response.Headers.Where(x => x.Name.ToUpper() == "X-BC-APILIMIT-REMAINING").FirstOrDefault();
                 if (head != null) {
                     int limitvalue;
                     bool wasParsed = int.TryParse(head.Value.ToString(), out limitvalue);
@@ -256,7 +256,7 @@ namespace BigCommerce4Net.Api
 
         }
         protected static void ShowIdAndApiLimit(object id, IRestResponse restResponse) {
-            var apiLimit = restResponse.Headers.Where(x => x.Name == "X-BC-ApiLimit-Remaining").FirstOrDefault().Value;
+            var apiLimit = restResponse.Headers.Where(x => x.Name.ToUpper() == "X-BC-APILIMIT-REMAINING").FirstOrDefault().Value;
             log.InfoFormat("Id {0} -- API Limit: {1}", id, apiLimit);
         }
         
@@ -357,7 +357,7 @@ namespace BigCommerce4Net.Api
                 page = 0;
             }
             string str = string.Format("Page {0} Record Count {1} -- API Limit: {2}", page, count,
-                        response.Headers.Where(x => x.Name == "X-BC-ApiLimit-Remaining").FirstOrDefault().Value);
+                        response.Headers.Where(x => x.Name.ToUpper() == "X-BC-APILIMIT-REMAINING").FirstOrDefault().Value);
 
             return str;
         }
