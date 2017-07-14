@@ -39,11 +39,11 @@ namespace BigCommerce4Net.Api.ResourceClients
             return base.Count<ItemCount>(resourceEndpoint, filter);
         }
         public IClientResponse<List<ProductsOption>> Get(int productid) {
-            string resourceEndpoint = string.Format("/product/{0}/options", productid);
+            string resourceEndpoint = string.Format("/products/{0}/options", productid);
             return base.GetData<List<ProductsOption>>(resourceEndpoint);
         }
         public IClientResponse<ProductsOption> Get(int productid, int fieldId) {
-            string resourceEndpoint = string.Format("/product/{0}/options/{1}", productid, fieldId);
+            string resourceEndpoint = string.Format("/products/{0}/options/{1}", productid, fieldId);
             return base.GetData<ProductsOption>(resourceEndpoint);
         }
         public IClientResponse<List<ProductsOption>> Get(string resourceEndPoint) {
@@ -54,11 +54,11 @@ namespace BigCommerce4Net.Api.ResourceClients
         }
 
         public IClientResponse<HttpOptions> GetHttpOptions(int productid) {
-            string resourceEndpoint = string.Format("/product/{0}/options", productid);
+            string resourceEndpoint = string.Format("/products/{0}/options", productid);
             return base.GetHttpOptionsData<HttpOptions>(resourceEndpoint);
         }
         public IClientResponse<HttpOptions> GetHttpOptions(int productid, int fieldId) {
-            string resourceEndpoint = string.Format("/product/{0}/options/{1}", productid, fieldId);
+            string resourceEndpoint = string.Format("/products/{0}/options/{1}", productid, fieldId);
             return base.GetHttpOptionsData<HttpOptions>(resourceEndpoint);
         }
 
