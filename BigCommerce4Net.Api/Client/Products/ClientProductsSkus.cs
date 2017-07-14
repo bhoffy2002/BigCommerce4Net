@@ -40,7 +40,14 @@ namespace BigCommerce4Net.Api.ResourceClients
             return base.Count<ItemCount>(resourceEndpoint, filter);
         }
         public IClientResponse<List<ProductsSku>> Get(int productid) {
-            string resourceEndpoint = string.Format("/products/{0}/skus", productid);
+            //AZDeveloper777 notes:
+            //I had to add the limit to the string literal for this resource because
+            //one of our products had too many sku's which was causing the system to error out
+            //As of 7/14/2017 I am not sure of any negative consequences this may have
+            //this will stay in our production branch for the time being
+            //the original code is the commented out line immediately below
+            //string resourceEndpoint = string.Format("/products/{0}/skus", productid);
+            string resourceEndpoint = string.Format("/products/{0}/skus?limit=250", productid);
             return base.GetData<List<ProductsSku>>(resourceEndpoint);
         }
         public IClientResponse<ProductsSku> Get(int productId, int skuId) {
