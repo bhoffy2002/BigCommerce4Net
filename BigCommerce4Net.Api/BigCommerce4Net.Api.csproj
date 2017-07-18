@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Client\Client.cs" />
     <Compile Include="Exceptions\NewtonSoftJsonDeserializerException.cs" />
+    <Compile Include="Filters\Orders\FilterOrdersProducts.cs" />
     <Compile Include="Interfaces\IChildResourceGet.cs" />
     <Compile Include="Interfaces\IChildResourceGetUpdate.cs" />
     <Compile Include="Interfaces\IChildResourceGetUpdateDelete.cs" />

@@ -26,7 +26,20 @@ namespace BigCommerce4Net.Api.ExtensionMethods
     {
         public static string SerializeObject(this object obj) {
 
-            string json = JsonConvert.SerializeObject(obj, Formatting.None);
+            var settings = new JsonSerializerSettings
+            {
+                Error = (sender, args) =>
+                {
+                    if (System.Diagnostics.Debugger.IsAttached)
+                    {
+                        System.Diagnostics.Debugger.Break();
+                    }
+                }
+            };
+
+            settings.MissingMemberHandling = MissingMemberHandling.Error;
+
+            string json = JsonConvert.SerializeObject(obj, Formatting.None, settings);
             return json;
         }
     }   

@@ -18,11 +18,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BigCommerce4Net.Domain;
+using BigCommerce4Net.Api.ExtensionMethods;
 
 namespace BigCommerce4Net.Api.ResourceClients
 {
     public class ClientOrdersProducts : 
         ClientBase,
+        IParentResourcePaging<OrdersProduct>,
         IChildResourceGet<OrdersProduct>,
         IChildResourceCount
     {
@@ -38,10 +40,23 @@ namespace BigCommerce4Net.Api.ResourceClients
             string resourceEndpoint = string.Format("/orders/{0}/products/count", orderId);
             return base.Count<ItemCount>(resourceEndpoint, filter);
         }
+
+        [ObsoleteAttribute("This property is obsolete. Use GetPaged(int OrderId) instead.", true)]
         public IClientResponse<List<OrdersProduct>> Get(int orderId) {
             string resourceEndpoint = string.Format("/orders/{0}/products", orderId);
             return base.GetData<List<OrdersProduct>>(resourceEndpoint);
         }
+
+        public List<OrdersProduct> GetPaged(int orderId)
+        {
+            string resourceEndpoint = string.Format("/orders/{0}/products", orderId);
+            FilterOrdersProducts filter = new FilterOrdersProducts();
+            filter.Limit = 40;
+            filter.OrderID = orderId;
+            return base.RecordPaging<OrdersProduct>(filter, this);
+            
+        }
+
         public IClientResponse<OrdersProduct> Get(int orderId, int productId) {
             string resourceEndpoint = string.Format("/orders/{0}/products/{1}", orderId, productId);
             return base.GetData<OrdersProduct>(resourceEndpoint);
@@ -64,33 +79,55 @@ namespace BigCommerce4Net.Api.ResourceClients
 
         public void Get(IList<Order> orders) {
             foreach (var item in orders) {
-                var response = this.Get(item.Id);
+                var opList = this.GetPaged(item.Id);
 
-                if (response.RestResponse.StatusCode == System.Net.HttpStatusCode.OK && 
-                    response.Data != null && response.Data != null) {
-
-                    foreach (var xitem in response.Data) {
+                if (opList != null && opList.Count > 0)
+                {
+                    foreach (var xitem in opList)
+                    {
                         item.Products.Add(xitem);
                     }
-                    ShowIdAndApiLimit(item.Id, response.RestResponse);
-                } else {
-                    StatusCodeLogging(response.RestResponse, GetType());
+                    //ShowIdAndApiLimit(item.Id, response.RestResponse);
                 }
+                //else {
+                //    StatusCodeLogging(response.RestResponse, GetType());
+                //}
             }
         }
         public void Get(Order order) {
-            var response = this.Get(order.Id);
+            var opList = this.GetPaged(order.Id);
 
-            if (response.RestResponse.StatusCode == System.Net.HttpStatusCode.OK && 
-                response.Data != null && response.Data != null) {
+            if (opList != null && opList.Count > 0) {
 
-                foreach (var xitem in response.Data) {
+                foreach (var xitem in opList)
+                {
                     order.Products.Add(xitem);
                 }
-                ShowIdAndApiLimit(order.Id, response.RestResponse);
-            } else {
-                StatusCodeLogging(response.RestResponse, GetType());
+                //ShowIdAndApiLimit(order.Id, response.RestResponse);
             }
+            //else {
+            //    StatusCodeLogging(response.RestResponse, GetType());
+            //}
+        }
+
+        IClientResponse<ItemCount> IParentResourcePaging<OrdersProduct>.Count()
+        {
+            throw new NotImplementedException();
+        }
+
+        IClientResponse<ItemCount> IParentResourcePaging<OrdersProduct>.Count(IFilter filter)
+        {
+            var cFilter = (FilterOrdersProducts)filter;
+            int orderID = cFilter.OrderID;
+            return Count(orderID);
+        }
+
+        IClientResponse<List<OrdersProduct>> IParentResourcePaging<OrdersProduct>.Get(IFilter filter)
+        {
+            var cFilter = (FilterOrdersProducts)filter;
+            int orderID = cFilter.OrderID;
+            string resourceEndpoint = string.Format("/orders/{0}/products", orderID);
+            return base.GetData<List<OrdersProduct>>(resourceEndpoint,filter);
         }
     }
 }
