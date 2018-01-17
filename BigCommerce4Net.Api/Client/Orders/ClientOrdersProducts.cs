@@ -42,6 +42,11 @@ namespace BigCommerce4Net.Api.ResourceClients
             string resourceEndpoint = string.Format("/orders/{0}/products", orderId);
             return base.GetData<List<OrdersProduct>>(resourceEndpoint);
         }
+
+        public IClientResponse<List<OrdersProduct>> Get(int orderId, IFilter filter) {
+            string resourceEndpoint = string.Format("/orders/{0}/products", orderId);
+            return base.GetData<List<OrdersProduct>>(resourceEndpoint, filter);
+        }
         public IClientResponse<OrdersProduct> Get(int orderId, int productId) {
             string resourceEndpoint = string.Format("/orders/{0}/products/{1}", orderId, productId);
             return base.GetData<OrdersProduct>(resourceEndpoint);
