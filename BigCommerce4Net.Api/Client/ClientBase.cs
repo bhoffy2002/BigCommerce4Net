@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using RestSharp;
 using Newtonsoft.Json;
@@ -30,6 +31,7 @@ namespace BigCommerce4Net.Api
         protected ClientBase(Configuration _configuration) {
             _configuration.AreConfigurationSet();
             _Configuration = _configuration;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         }
         protected IClientResponse<T> Count<T>(string resourceEndpoint)
             where T : new() {
