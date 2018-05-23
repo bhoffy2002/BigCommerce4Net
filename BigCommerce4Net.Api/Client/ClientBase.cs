@@ -230,7 +230,7 @@ namespace BigCommerce4Net.Api
             ((RestClient)restClient).AddHandler("application/json", new Deserializers.NewtonSoftJsonDeserializer());
             
             var client = restClient;
-            client.Authenticator = new HttpBasicAuthenticator(_Configuration.UserName, _Configuration.UserApiKey);
+            client.Authenticator = new RestSharp.Authenticators.HttpBasicAuthenticator(_Configuration.UserName, _Configuration.UserApiKey);
             client.Timeout = _Configuration.RequestTimeout;
 
             var response = client.Execute<T>(request);
