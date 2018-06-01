@@ -18,14 +18,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Api = BigCommerce4Net.Api;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace BigCommerce4Net.Api_Tests
+namespace BigCommerce4Net.Api_Tests2
 {
-    public class FixtureBase
+    public class TestClassBase
     {
         public Api.Client Client { get; set; }
         public Api.Configuration Api_Configuration { get; set; }
@@ -36,7 +36,7 @@ namespace BigCommerce4Net.Api_Tests
         public const int TEST_COUNTRY_ID = 226;
         public const int TEST_COUPON_ID = 1;
 
-        [SetUp]
+        [TestInitialize]
         public void SetClient() {
             SetupContext();
             Client = new Api.Client(this.Api_Configuration);
@@ -49,7 +49,9 @@ namespace BigCommerce4Net.Api_Tests
             Api_Configuration = new Api.Configuration() {
                 ServiceURL = settings.ServiceURL,
                 UserName = settings.UserName,
-                UserApiKey = settings.UserApiKey
+                UserApiKey = settings.UserApiKey,
+				AuthenticationType = settings.AuthenticationType,
+				ApiVersion = settings.ApiVersion
             };
 
         }

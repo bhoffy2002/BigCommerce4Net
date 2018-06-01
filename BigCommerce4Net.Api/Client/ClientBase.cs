@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using RestSharp;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace BigCommerce4Net.Api
 {
@@ -27,10 +28,14 @@ namespace BigCommerce4Net.Api
     {
         private readonly Configuration _Configuration;
 
+		private static AuthenticationType _AuthType;
+
         protected ClientBase(Configuration _configuration) {
             _configuration.AreConfigurationSet();
             _Configuration = _configuration;
-        }
+			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+			_AuthType = _configuration.AuthenticationType;
+		}
         protected IClientResponse<T> Count<T>(string resourceEndpoint)
             where T : new() {
                 return Count<T>(resourceEndpoint, null);
@@ -230,8 +235,11 @@ namespace BigCommerce4Net.Api
             ((RestClient)restClient).AddHandler("application/json", new Deserializers.NewtonSoftJsonDeserializer());
             
             var client = restClient;
-            client.Authenticator = new RestSharp.Authenticators.HttpBasicAuthenticator(_Configuration.UserName, _Configuration.UserApiKey);
-            client.Timeout = _Configuration.RequestTimeout;
+			if(_Configuration.AuthenticationType == AuthenticationType.BasicAuthentication)
+				client.Authenticator = new RestSharp.Authenticators.HttpBasicAuthenticator(_Configuration.UserName, _Configuration.UserApiKey);
+			else
+				client.Authenticator = new BigcommerceOAuthAuthenticator(_Configuration.UserApiKey, _Configuration.UserName);
+			client.Timeout = _Configuration.RequestTimeout;
 
             var response = client.Execute<T>(request);
 
@@ -356,11 +364,20 @@ namespace BigCommerce4Net.Api
             if (page == null) {
                 page = 0;
             }
-            string str = string.Format("Page {0} Record Count {1} -- API Limit: {2}", page, count,
-                        response.Headers.Where(x => x.Name.ToUpper() == "X-BC-APILIMIT-REMAINING").FirstOrDefault().Value);
+            string str = string.Format("Page {0} Record Count {1} -- API Limit: {2}", page, count, GetApiCallsLeft(response));
 
             return str;
         }
+
+		private static object GetApiCallsLeft(RestSharp.IRestResponse response)
+		{
+			return (_AuthType.Equals(AuthenticationType.BasicAuthentication)
+				? response.Headers.Where(x => x.Name.ToUpper() == "X-BC-APILIMIT-REMAINING")
+				: response.Headers.Where(x => x.Name.ToUpper() == "X-RATE-LIMIT-REQUESTS-LEFT")
+				).FirstOrDefault().Value;
+
+		}
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger
             (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
     }

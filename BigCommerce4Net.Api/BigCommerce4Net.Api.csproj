@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BigcommerceOAuthAuthenticator.cs" />
     <Compile Include="Client\Client.cs" />
     <Compile Include="Exceptions\NewtonSoftJsonDeserializerException.cs" />
     <Compile Include="Filters\Orders\FilterOrdersProducts.cs" />

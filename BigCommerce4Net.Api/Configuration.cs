@@ -36,6 +36,9 @@ namespace BigCommerce4Net.Api
         public int RecordsPerPage { get; set; }
         public bool AllowDeletions { get; set; }
 
+		public AuthenticationType AuthenticationType { get; set; }
+		public ApiVersion ApiVersion { get; set; }
+
 
         public Configuration() {
             UserAgent = "BigCommerce4Net";
@@ -48,11 +51,13 @@ namespace BigCommerce4Net.Api
             RecordsPerPage = 250;
             AllowDeletions = false;
         }
-        public Configuration(string serviceURL, string userName, string userApiKey)
+        public Configuration(string serviceURL, string userName, string userApiKey, AuthenticationType authenticationType = AuthenticationType.BasicAuthentication, ApiVersion apiVersion = ApiVersion.V2)
             : this() {
             this.ServiceURL = serviceURL;
             this.UserName = userName;
             this.UserApiKey = userApiKey;
+			this.AuthenticationType = authenticationType;
+			this.ApiVersion = apiVersion;
         }
         
         internal void AreConfigurationSet() {
@@ -62,6 +67,10 @@ namespace BigCommerce4Net.Api
                 throw new ArgumentNullException("UserName", "UserName cannot be null.");
             if (UserApiKey == null)
                 throw new ArgumentNullException("UserApiKey", "UserApiKey cannot be null.");
-        }
+		}
     }
+
+	public enum AuthenticationType { BasicAuthentication, OAuth }
+
+	public enum ApiVersion { V2, V3 }
 }
