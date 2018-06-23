@@ -38,7 +38,7 @@ namespace BigCommerce4Net.Api_Tests2.Customers
 
             var response = Client.CustomersAddresses.GetHttpOptions(TEST_CUSTOMER_ID);
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.AreNotEqual(response.Data, null);
+            Assert.AreNotEqual(response.Result, null);
         }
     }
 }

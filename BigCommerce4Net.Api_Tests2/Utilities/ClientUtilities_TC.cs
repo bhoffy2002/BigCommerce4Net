@@ -32,7 +32,7 @@ namespace BigCommerce4Net.Api_Tests2.Utilities
             var response = Client.Utilities.GetTime();
 
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsTrue((double)response.Data.UnixTimeStamp > 0.00D);
+            Assert.IsTrue((double)response.Result.UnixTimeStamp > 0.00D);
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace BigCommerce4Net.Api_Tests2.Utilities
 
             var response = Client.Utilities.GetHttpOptions();
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.AreNotEqual(response.Data, null);
+            Assert.AreNotEqual(response.Result, null);
         }
     }
 }

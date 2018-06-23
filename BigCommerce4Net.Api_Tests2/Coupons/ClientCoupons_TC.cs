@@ -34,7 +34,7 @@ namespace BigCommerce4Net.Api_Tests2.Customers
 
             var response = Client.Coupons.Get();
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsTrue(response.Data.Count > 0);
+            Assert.IsTrue(response.Result.Count > 0);
         }
         [TestMethod]
         public void Can_Get_Coupons_With_Limit_Parameter_Paging() {
@@ -44,23 +44,23 @@ namespace BigCommerce4Net.Api_Tests2.Customers
 
             var response = Client.Coupons.Get(filter);
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsNotNull(response.Data);
-            Assert.AreEqual(response.Data.Count, 5);
+            Assert.IsNotNull(response.Result);
+            Assert.AreEqual(response.Result.Count, 5);
         }
         [TestMethod]
         public void Can_Get_One_Coupon_By_Id() {
 
             var response = Client.Coupons.Get(TEST_COUPON_ID);
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsNotNull(response.Data);
-            Assert.AreEqual(response.Data.Id, TEST_COUPON_ID);
+            Assert.IsNotNull(response.Result);
+            Assert.AreEqual(response.Result.Id, TEST_COUPON_ID);
         }
         [TestMethod]
         public void Can_Get_Coupons_Options() {
 
             var response = Client.Coupons.GetHttpOptions();
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsNotNull(response.Data);
+            Assert.IsNotNull(response.Result);
         }
     }
 }

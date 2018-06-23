@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BigCommerce4Net.Domain;
+using BigCommerce4Net.Domain.Entities.V2.Orders;
 
 namespace BigCommerce4Net.Api.ResourceClients
 {
@@ -66,8 +67,8 @@ namespace BigCommerce4Net.Api.ResourceClients
             List<OrderStatus> items = new List<OrderStatus>();
             var response = Get();
             if (response.RestResponse.StatusCode == System.Net.HttpStatusCode.OK &&
-                response.Data != null && response.Data != null) {
-                items.AddRange(response.Data);
+                response.Result != null && response.Result != null) {
+                items.AddRange(response.Result);
             } else {
                 StatusCodeLogging(response.RestResponse, GetType());
             }

@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BigCommerce4Net.Domain;
 using BigCommerce4Net.Api.ExtensionMethods;
+using BigCommerce4Net.Domain.Entities.V2.Products;
 
 namespace BigCommerce4Net.Api.ResourceClients
 {

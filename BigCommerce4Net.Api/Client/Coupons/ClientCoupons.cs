@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using BigCommerce4Net.Domain;
 using BigCommerce4Net.Api.ExtensionMethods;
+using BigCommerce4Net.Domain.Entities.V2.Coupons;
 
 
 namespace BigCommerce4Net.Api.ResourceClients

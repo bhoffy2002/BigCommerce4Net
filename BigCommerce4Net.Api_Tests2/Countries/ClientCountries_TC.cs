@@ -31,14 +31,14 @@ namespace BigCommerce4Net.Api_Tests2.Countries
 
             var response = Client.Countries.Count();
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsTrue(response.Data.Count > 0);
+            Assert.IsTrue(response.Result.Count > 0);
         }
         [TestMethod]
         public void Can_Get_All_Countries_Default_Paging() {
 
             var response = Client.Countries.Get();
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.AreEqual(response.Data.Count, 50);
+            Assert.AreEqual(response.Result.Count, 50);
         }
         [TestMethod]
         public void Can_Get_All_Countries_With_Limit_Parameter_Paging() {
@@ -49,7 +49,7 @@ namespace BigCommerce4Net.Api_Tests2.Countries
 
             var response = Client.Countries.Get(filter);
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.AreEqual(response.Data.Count, 200);
+            Assert.AreEqual(response.Result.Count, 200);
         }
 
         [TestMethod]
@@ -57,8 +57,8 @@ namespace BigCommerce4Net.Api_Tests2.Countries
 
             var response = Client.Countries.Get(TEST_COUNTRY_ID);
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsNotNull(response.Data);
-            Assert.AreEqual(response.Data.Id, TEST_COUNTRY_ID);
+            Assert.IsNotNull(response.Result);
+            Assert.AreEqual(response.Result.Id, TEST_COUNTRY_ID);
         }
         [TestMethod]
         public void Can_Get_All_Countries_With_Paging() {
@@ -72,7 +72,7 @@ namespace BigCommerce4Net.Api_Tests2.Countries
 
             var response = Client.Countries.GetHttpOptions();
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.AreNotEqual(response.Data, null);
+            Assert.AreNotEqual(response.Result, null);
         }
     }
 }

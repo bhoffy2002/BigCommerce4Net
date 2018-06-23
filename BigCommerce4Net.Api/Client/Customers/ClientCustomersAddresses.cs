@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BigCommerce4Net.Domain;
+using BigCommerce4Net.Domain.Entities.V2.Customers;
 
 
 namespace BigCommerce4Net.Api.ResourceClients
@@ -70,9 +71,9 @@ namespace BigCommerce4Net.Api.ResourceClients
                 var response = this.Get(item.Id);
 
                 if (response.RestResponse.StatusCode == System.Net.HttpStatusCode.OK &&
-                    response.Data != null && response.Data != null) {
+                    response.Result != null && response.Result != null) {
 
-                    foreach (var xitem in response.Data) {
+                    foreach (var xitem in response.Result) {
                         item.Addresses.Add(xitem);
                     }
                     ShowIdAndApiLimit(item.Id, response.RestResponse);
@@ -85,9 +86,9 @@ namespace BigCommerce4Net.Api.ResourceClients
             var response = this.Get(customer.Id);
 
             if (response.RestResponse.StatusCode == System.Net.HttpStatusCode.OK &&
-                response.Data != null && response.Data != null) {
+                response.Result != null && response.Result != null) {
 
-                foreach (var xitem in response.Data) {
+                foreach (var xitem in response.Result) {
                     customer.Addresses.Add(xitem);
                 }
                 ShowIdAndApiLimit(customer.Id, response.RestResponse);

@@ -31,7 +31,7 @@ namespace BigCommerce4Net.Api_Tests2.Products
 
             var response = Client.Products.GetHttpOptions();
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.AreNotEqual(response.Data, null);
+            Assert.AreNotEqual(response.Result, null);
         }
     }
 }

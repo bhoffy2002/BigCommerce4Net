@@ -32,7 +32,7 @@ namespace BigCommerce4Net.Api_Tests2.Orders
             var response = Client.Orders.Count();
 
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsTrue(response.Data.Count > 0);
+            Assert.IsTrue(response.Result.Count > 0);
         }
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace BigCommerce4Net.Api_Tests2.Orders
             var response = Client.Orders.Get(filter);
 
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsTrue(response.Data.Count > 0);
+            Assert.IsTrue(response.Result.Count > 0);
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace BigCommerce4Net.Api_Tests2.Orders
             var response_count = Client.Orders.Count(filter);
             var response_list = Client.Orders.GetList(filter);
 
-            Assert.AreEqual(response_list.Count, response_count.Data.Count);
+            Assert.AreEqual(response_list.Count, response_count.Result.Count);
         }
 
         [TestMethod]
@@ -67,17 +67,17 @@ namespace BigCommerce4Net.Api_Tests2.Orders
             var response_count = Client.Orders.Count();
             var response_list = Client.Orders.GetList();
 
-            Assert.AreEqual(response_list.Count, response_count.Data.Count);
+            Assert.AreEqual(response_list.Count, response_count.Result.Count);
         }
         [TestMethod]
         public void Can_Get_ShippingAddresses_And_Add() {
 
             var response_order = Client.Orders.Get(200);
 
-            Client.OrdersShippingAddresses.Get(response_order.Data);
+            Client.OrdersShippingAddresses.Get(response_order.Result);
 
-            Assert.IsTrue(response_order.Data.ShippingAddresses.Count > 0);
-            Assert.AreEqual(response_order.Data.Id, response_order.Data.ShippingAddresses[0].OrderId);
+            Assert.IsTrue(response_order.Result.ShippingAddresses.Count > 0);
+            Assert.AreEqual(response_order.Result.Id, response_order.Result.ShippingAddresses[0].OrderId);
 
         }
          [TestMethod]
@@ -85,10 +85,10 @@ namespace BigCommerce4Net.Api_Tests2.Orders
 
             var response_order = Client.Orders.Get(200);
 
-            Client.OrdersProducts.Get(response_order.Data);
+            Client.OrdersProducts.Get(response_order.Result);
 
-            Assert.IsTrue(response_order.Data.Products.Count > 0);
-            Assert.AreEqual(response_order.Data.Id, response_order.Data.Products[0].OrderId);
+            Assert.IsTrue(response_order.Result.Products.Count > 0);
+            Assert.AreEqual(response_order.Result.Id, response_order.Result.Products[0].OrderId);
 
         }
          [TestMethod]
@@ -96,7 +96,7 @@ namespace BigCommerce4Net.Api_Tests2.Orders
 
              var response = Client.Orders.GetHttpOptions();
              Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-             Assert.AreNotEqual(response.Data, null);
+             Assert.AreNotEqual(response.Result, null);
          }
 
     }

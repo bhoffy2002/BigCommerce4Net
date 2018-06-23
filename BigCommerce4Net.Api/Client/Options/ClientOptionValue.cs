@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BigCommerce4Net.Domain;
+using BigCommerce4Net.Domain.Entities.V2.Options;
 
 namespace BigCommerce4Net.Api.ResourceClients
 {

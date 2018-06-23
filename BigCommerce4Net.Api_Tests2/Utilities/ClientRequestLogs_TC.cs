@@ -32,14 +32,14 @@ namespace BigCommerce4Net.Api_Tests2.Utilities
             var response = Client.RequestLogs.Get();
 
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsTrue(response.Data.Count > 0);
+            Assert.IsTrue(response.Result.Count > 0);
         }
         [TestMethod]
         public void Can_Get_GetHttpOptions() {
 
             var response = Client.RequestLogs.GetHttpOptions();
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.AreNotEqual(response.Data, null);
+            Assert.AreNotEqual(response.Result, null);
         }
     }
 }

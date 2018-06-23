@@ -30,11 +30,14 @@ namespace BigCommerce4Net.Api
         public int ErrorRetryMax { get; set; }
         public int ErrorRetryDelay { get; set; }
         public int RequestTimeout { get; set; }
-        public bool RequestThrottling { get; set; }
+	    public bool RequestThrottling { get; set; }
         public int RequestThrottlingDelay { get; set; }
         public int MaxPageLimit { get; set; }
         public int RecordsPerPage { get; set; }
         public bool AllowDeletions { get; set; }
+
+	    public int BasicAuthThrottleLimit { get; set; }
+		public int OAuthThrottleLimit { get; set; }
 
 		public AuthenticationType AuthenticationType { get; set; }
 		public ApiVersion ApiVersion { get; set; }
@@ -43,13 +46,17 @@ namespace BigCommerce4Net.Api
         public Configuration() {
             UserAgent = "BigCommerce4Net";
             RequestTimeout = 100000;
-            ErrorRetryMax = 5;
+			ErrorRetryMax = 5;
             ErrorRetryDelay = 60000;
             RequestThrottling = true;
             RequestThrottlingDelay = 60000;
             MaxPageLimit = 250;
             RecordsPerPage = 250;
             AllowDeletions = false;
+
+	        BasicAuthThrottleLimit = 1000;
+	        OAuthThrottleLimit = 30;
+
         }
         public Configuration(string serviceURL, string userName, string userApiKey, AuthenticationType authenticationType = AuthenticationType.BasicAuthentication, ApiVersion apiVersion = ApiVersion.V2)
             : this() {

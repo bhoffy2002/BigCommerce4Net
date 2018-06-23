@@ -26,7 +26,8 @@ namespace BigCommerce4Net.Api
     public class ClientResponse<T> : BigCommerce4Net.Api.IClientResponse<T>
     {
         public IRestResponse RestResponse { get; set; }
-        public T Data { get; set; }
+        public T Result { get; set; }
         public IList<BigCommerce4Net.Domain.Error> ResponseErrors { get; set; }
+
     }
 }

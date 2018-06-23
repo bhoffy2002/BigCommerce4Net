@@ -32,7 +32,7 @@ namespace BigCommerce4Net.Api_Tests2.Countries
             var response = Client.States.Count();
 
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsTrue(response.Data.Count > 0);
+            Assert.IsTrue(response.Result.Count > 0);
         }
         [TestMethod]
         public void Can_Get_All_States_Default_Paging() {
@@ -40,7 +40,7 @@ namespace BigCommerce4Net.Api_Tests2.Countries
             var response = Client.States.Get();
 
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.AreEqual(response.Data.Count, 50);
+            Assert.AreEqual(response.Result.Count, 50);
         }
 
         [TestMethod]
@@ -58,16 +58,16 @@ namespace BigCommerce4Net.Api_Tests2.Countries
 
             var response = Client.States.Get(filter);
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsNotNull(response.Data);
-            Assert.AreEqual(response.Data.Count, 200);
+            Assert.IsNotNull(response.Result);
+            Assert.AreEqual(response.Result.Count, 200);
         }
         [TestMethod]
         public void Can_Get_One_State_By_Id() {
 
             var response = Client.States.Get(TEST_STATE_ID);
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsNotNull(response.Data);
-            Assert.AreEqual(response.Data.Id, TEST_STATE_ID);
+            Assert.IsNotNull(response.Result);
+            Assert.AreEqual(response.Result.Id, TEST_STATE_ID);
         }
 
         [TestMethod]
@@ -76,15 +76,15 @@ namespace BigCommerce4Net.Api_Tests2.Countries
             var response = Client.States.GetStatesInCountry(TEST_COUNTRY_ID);
 
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsNotNull(response.Data);
-            Assert.IsTrue(response.Data.Count > 0);
+            Assert.IsNotNull(response.Result);
+            Assert.IsTrue(response.Result.Count > 0);
         }
         [TestMethod]
         public void Can_Get_GetHttpOptions() {
 
             var response = Client.States.GetHttpOptions();
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsNotNull(response.Data);
+            Assert.IsNotNull(response.Result);
         }
     }
 }

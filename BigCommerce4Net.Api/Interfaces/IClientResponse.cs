@@ -21,7 +21,7 @@ namespace BigCommerce4Net.Api
 {
     public interface IClientResponse<T>
     {
-        T Data { get; set; }
+        T Result { get; set; }
         global::RestSharp.IRestResponse RestResponse { get; set; }
         IList<BigCommerce4Net.Domain.Error> ResponseErrors { get; set; }
     }

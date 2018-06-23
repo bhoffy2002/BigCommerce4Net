@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BigCommerce4Net.Domain;
+using BigCommerce4Net.Domain.Entities.V2.Products;
 
 namespace BigCommerce4Net.Api.ResourceClients
 {
@@ -71,8 +72,8 @@ namespace BigCommerce4Net.Api.ResourceClients
                 var response = this.Get(item.Id);
 
                 if (response.RestResponse.StatusCode == System.Net.HttpStatusCode.OK &&
-                    response.Data != null && response.Data != null) {
-                    foreach (var xitem in response.Data) {
+                    response.Result != null && response.Result != null) {
+                    foreach (var xitem in response.Result) {
                         item.DiscountRules.Add(xitem);
                     }
                     ShowIdAndApiLimit(item.Id, response.RestResponse);
@@ -85,8 +86,8 @@ namespace BigCommerce4Net.Api.ResourceClients
             var response = this.Get(item.Id);
 
             if (response.RestResponse.StatusCode == System.Net.HttpStatusCode.OK &&
-                response.Data != null && response.Data != null) {
-                foreach (var xitem in response.Data) {
+                response.Result != null && response.Result != null) {
+                foreach (var xitem in response.Result) {
                     item.DiscountRules.Add(xitem);
                 }
                 ShowIdAndApiLimit(item.Id, response.RestResponse);

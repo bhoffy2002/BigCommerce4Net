@@ -21,6 +21,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Api = BigCommerce4Net.Api;
 using Domain = BigCommerce4Net.Domain;
 using BigCommerce4Net.Domain;
+using BigCommerce4Net.Domain.Entities.V2.Orders;
 using Newtonsoft.Json;
 
 
@@ -35,7 +36,7 @@ namespace BigCommerce4Net.Api_Tests2.Customers
             var response = Client.Customers.Count();
             
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsTrue(response.Data.Count > 0);
+            Assert.IsTrue(response.Result.Count > 0);
         }
 
         [TestMethod]
@@ -50,8 +51,8 @@ namespace BigCommerce4Net.Api_Tests2.Customers
             var response = Client.Customers.Get(filter);
 
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.AreEqual(response.Data.Count, 1);
-            Assert.AreEqual(response.Data[0].Id, 2600);
+            Assert.AreEqual(response.Result.Count, 1);
+            Assert.AreEqual(response.Result[0].Id, 2600);
         }
         [TestMethod]
         public void Can_Customer_StoreCredit_Be_Updated() {
@@ -64,15 +65,15 @@ namespace BigCommerce4Net.Api_Tests2.Customers
 
             var response = Client.Customers.Update(TEST_CUSTOMER_ID, json);
 
-            Assert.AreNotEqual(null, response.Data);
-            Assert.AreEqual(TEST_CUSTOMER_ID, response.Data.Id);
-            Assert.AreEqual(storecredit, response.Data.StoreCredit);
+            Assert.AreNotEqual(null, response.Result);
+            Assert.AreEqual(TEST_CUSTOMER_ID, response.Result.Id);
+            Assert.AreEqual(storecredit, response.Result.StoreCredit);
         }
         [TestMethod]
         public void Can_Customer_StoreCredit_Be_Updated_Then_Get_Will_IfModifiedSince() {
             
             var response = Client.Utilities.GetTime();
-            var date = response.Data.CurrentDateTime;
+            var date = response.Result.CurrentDateTime;
             var serverdatetime = string.Format("{0:r}", date);
             
             decimal storecredit = 8000.00M;
@@ -83,21 +84,21 @@ namespace BigCommerce4Net.Api_Tests2.Customers
 
             var response1 = Client.Customers.Update(TEST_CUSTOMER_ID, json);
 
-            Assert.AreNotEqual(null, response.Data);
-            Assert.AreEqual(TEST_CUSTOMER_ID, response1.Data.Id);
-            Assert.AreEqual(storecredit, response1.Data.StoreCredit);
+            Assert.AreNotEqual(null, response.Result);
+            Assert.AreEqual(TEST_CUSTOMER_ID, response1.Result.Id);
+            Assert.AreEqual(storecredit, response1.Result.StoreCredit);
 
             var filter = new Api.FilterCustomers();
             filter.IfModifiedSince = ((DateTime)date).AddMinutes(-10);
 
             var response2 = Client.Customers.Count(filter);
-            Assert.IsTrue(0 > response2.Data.Count);
+            Assert.IsTrue(0 > response2.Result.Count);
         }
 
         [TestMethod]
         public void Check_Customer_Modified_Since() {
 
-            IEntity order = new Domain.Order() {
+            IEntity order = new Order() {
                 Id = 1,
                 PaymentStatus = PaymentStatus.PartiallyRefunded
             };
@@ -121,7 +122,7 @@ namespace BigCommerce4Net.Api_Tests2.Customers
 
             var response = Client.Customers.GetHttpOptions();
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.AreNotEqual(response.Data, null);
+            Assert.AreNotEqual(response.Result, null);
         }
         
     }

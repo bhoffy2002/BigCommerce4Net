@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BigCommerce4Net.Domain;
 using BigCommerce4Net.Api.ExtensionMethods;
+using BigCommerce4Net.Domain.Entities.V2.Orders;
 
 namespace BigCommerce4Net.Api.ResourceClients
 {
@@ -94,9 +95,9 @@ namespace BigCommerce4Net.Api.ResourceClients
                 var response = this.Get(item.Id);
 
                 if (response.RestResponse.StatusCode == System.Net.HttpStatusCode.OK &&
-                    response.Data != null && response.Data != null) {
+                    response.Result != null && response.Result != null) {
 
-                    foreach (var xitem in response.Data) {
+                    foreach (var xitem in response.Result) {
                         item.Shipments.Add(xitem);
                     }
                     ShowIdAndApiLimit(item.Id, response.RestResponse);
@@ -111,9 +112,9 @@ namespace BigCommerce4Net.Api.ResourceClients
             var response = this.Get(order.Id);
 
             if (response.RestResponse.StatusCode == System.Net.HttpStatusCode.OK && 
-                response.Data != null && response.Data != null) {
+                response.Result != null && response.Result != null) {
 
-                foreach (var xitem in response.Data) {
+                foreach (var xitem in response.Result) {
                     order.Shipments.Add(xitem);
                 }
                 ShowIdAndApiLimit(order.Id, response.RestResponse);

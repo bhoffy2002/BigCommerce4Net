@@ -48,7 +48,33 @@ namespace BigCommerce4Net.Api
         /// </summary>
         public DateTime? IfModifiedSince { get; set; }
 
-        public virtual void AddFilter(IRestRequest request)
+	    /// <summary>
+	    /// Sub-resources to include on a product, in a comma-separated list. Valid expansions currently include variants, images, custom_fields, and bulk_pricing_rules.
+	    /// </summary>
+	    public string Include { get; set; }
+
+
+	    /// <summary>
+	    /// Fields to include, in a comma-separated list. The ID and the specified fields will be returned.
+	    /// </summary>
+	    public string IncludeFields { get; set; }
+
+	    /// <summary>
+	    /// Fields to exclude, in a comma-separated list. The specified fields will be excluded from a response. The ID cannot be excluded.
+	    /// </summary>
+	    public string ExcludeFields { get; set; }
+
+	    /// <summary>
+	    /// Sort direction. Acceptable values are: asc, desc.
+	    /// </summary>
+	    public string Direction { get; set; }
+
+	    /// <summary>
+	    /// Field name to sort by.
+	    /// </summary>
+	    public virtual string Sort { get; set; }
+
+		public virtual void AddFilter(IRestRequest request)
         {
             if (this.IfModifiedSince != null)
                 request.AddHeader("If-Modified-Since", String.Format(RFC2822_DATE_FORMAT, this.IfModifiedSince));

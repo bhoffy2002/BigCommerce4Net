@@ -33,7 +33,7 @@ namespace BigCommerce4Net.Api_Tests2.Products
             var response = Client.Brands.Count();
 
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsTrue(response.Data.Count > 0);
+            Assert.IsTrue(response.Result.Count > 0);
         }
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace BigCommerce4Net.Api_Tests2.Products
             var response = Client.Brands.Get(filter);
 
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.IsTrue(response.Data.Count > 0);
+            Assert.IsTrue(response.Result.Count > 0);
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace BigCommerce4Net.Api_Tests2.Products
             var response_count = Client.Brands.Count(filter);
             var response_list = Client.Brands.GetList(filter);
 
-            Assert.AreEqual(response_list.Count, response_count.Data.Count);
+            Assert.AreEqual(response_list.Count, response_count.Result.Count);
         }
 
         [TestMethod]
@@ -67,14 +67,14 @@ namespace BigCommerce4Net.Api_Tests2.Products
             var response_count = Client.Brands.Count();
             var response_list = Client.Brands.GetList();
 
-            Assert.AreEqual(response_list.Count, response_count.Data.Count);
+            Assert.AreEqual(response_list.Count, response_count.Result.Count);
         }
         [TestMethod]
         public void Can_Get_GetHttpOptions() {
 
             var response = Client.Brands.GetHttpOptions();
             Assert.AreEqual(response.RestResponse.StatusCode, System.Net.HttpStatusCode.OK);
-            Assert.AreNotEqual(response.Data, null);
+            Assert.AreNotEqual(response.Result, null);
         }
 
         
