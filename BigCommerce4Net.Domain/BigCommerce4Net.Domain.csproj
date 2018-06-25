@@ -99,6 +99,7 @@
     <Compile Include="Entities\Utilities\ServerDateTime.cs" />
     <Compile Include="Entities\V3\Catalog\Brand.cs" />
     <Compile Include="Entities\V3\Catalog\Product.cs" />
+    <Compile Include="Entities\V3\Catalog\ProductImage.cs" />
     <Compile Include="Entities\V3\IEntityBaseV3.cs" />
     <Compile Include="Entities\V3\Misc\BigCResult.cs" />
     <Compile Include="Entities\V3\Misc\BigCResultList.cs" />

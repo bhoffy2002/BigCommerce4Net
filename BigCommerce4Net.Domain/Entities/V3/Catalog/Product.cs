@@ -13,10 +13,10 @@ namespace BigCommerce4Net.Domain.V3.Catalog
 {
 	public class Product : EntityBaseV3PkInt
 	{
-		// Used to easily set the JsonProperty Names in one place
 
-		#region JsonProperty Names (JPN_)...
-		public const string JPN_Name = "name";
+        #region JsonProperty Names (JPN_)...
+	    // Used to easily set the JsonProperty Names in one place
+        public const string JPN_Name = "name";
 		public const string JPN_Type = "type";
 		public const string JPN_Sku = "sku";
 		public const string JPN_Description = "description";
@@ -85,6 +85,7 @@ namespace BigCommerce4Net.Domain.V3.Catalog
 		#endregion
 
 		#region Private Backing Fields ...
+        // Used to tell which fields have values
 		private string _name;
 		private ProductsType? _type;
 		private string _sku;

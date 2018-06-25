@@ -59,6 +59,7 @@
     <Compile Include="Client\ClientV3.cs" />
     <Compile Include="Client\V3\Catalog\ClientBrands.cs" />
     <Compile Include="Client\V3\Catalog\ClientProducts.cs" />
+    <Compile Include="Client\V3\Catalog\ClientProductImages.cs" />
     <Compile Include="Client\V3\ClientBaseV3.cs" />
     <Compile Include="Deserializers\PropertyIgnoreSerializerContractResolver.cs" />
     <Compile Include="Exceptions\NewtonSoftJsonDeserializerException.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Filters\Products\FilterProducts.cs" />
     <Compile Include="Filters\Countries\FilterStates.cs" />
     <Compile Include="Interfaces\IFilter.cs" />
+    <Compile Include="Interfaces\V3\IChildEntityGet.cs" />
     <Compile Include="Interfaces\V3\IClientGetResponse.cs" />
     <Compile Include="Interfaces\V3\IClientResponseV3.cs" />
     <Compile Include="Interfaces\V3\IParentEntityGet.cs" />
